@@ -1,0 +1,3 @@
+import { teamMembers } from '@/data/teamData';
+import { TeamMemberCard } from './TeamMemberCard';
+export default function LeadershipTeam(){ return <section className="py-24 bg-black"><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><p className="text-red-500 font-mono text-sm">LEADERSHIP</p><h2 className="mt-3 text-4xl font-bold">The team behind the vehicle.</h2><p className="mt-4 text-gray-400 max-w-2xl">Team roles are being finalized for the 2026–27 campaign. Names and profiles will be published as they are confirmed.</p><div className="mt-10 grid md:grid-cols-2 lg:grid-cols-4 gap-4">{teamMembers.slice(0,4).map(m=><TeamMemberCard key={m.id} member={m}/>)}</div></div></section>; }

@@ -1,87 +1,41 @@
-import { Hero } from '@/components/home/Hero';
-import { ReturningSection } from '@/components/home/ReturningSection';
-import { Section } from '@/components/ui/Section';
-import { Container } from '@/components/ui/Container';
-import { Button } from '@/components/ui/Button';
+import Hero from '@/components/home/Hero';
+import TheReturn from '@/components/home/TheReturn';
+import TheMachine from '@/components/home/TheMachine';
+import Engineering from '@/components/home/Engineering';
 import Link from 'next/link';
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <ReturningSection />
+      <TheReturn />
+      <TheMachine />
+      <Engineering />
 
-      {/* The Team Preview */}
-      <Section id="team-preview" className="bg-vortex-white">
-        <Container>
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold">The Team</h2>
-            <div className="w-16 h-1 bg-accent mx-auto mt-4"></div>
-            <p className="mt-6 text-lg text-vortex-grey max-w-2xl mx-auto">
-              Student engineers working together to design, build, and compete.
-            </p>
-            <div className="mt-8">
-              <Button href="/team" variant="primary">
-                Meet the Team
-              </Button>
-            </div>
+      <section className="py-24 bg-gray-950 border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link href="/team" className="group bg-black border border-white/10 p-8 hover:border-red-600/60 transition-colors">
+              <span className="text-red-500 font-mono text-sm">01</span>
+              <h2 className="mt-4 text-2xl font-bold text-white">The Team</h2>
+              <p className="mt-3 text-gray-400">Meet the people designing, simulating, manufacturing, and driving Vortex One forward.</p>
+              <span className="inline-block mt-6 text-sm text-white group-hover:text-red-500">Meet the team →</span>
+            </Link>
+            <Link href="/competition" className="group bg-black border border-white/10 p-8 hover:border-red-600/60 transition-colors">
+              <span className="text-red-500 font-mono text-sm">02</span>
+              <h2 className="mt-4 text-2xl font-bold text-white">Competition</h2>
+              <p className="mt-3 text-gray-400">Understand the Baja SAE challenge and how our campaign is being built around it.</p>
+              <span className="inline-block mt-6 text-sm text-white group-hover:text-red-500">Explore competition →</span>
+            </Link>
+            <Link href="/sponsors" className="group bg-black border border-white/10 p-8 hover:border-red-600/60 transition-colors">
+              <span className="text-red-500 font-mono text-sm">03</span>
+              <h2 className="mt-4 text-2xl font-bold text-white">Partner With Us</h2>
+              <p className="mt-3 text-gray-400">Support a student engineering program through technical, manufacturing, academic, or financial partnership.</p>
+              <span className="inline-block mt-6 text-sm text-white group-hover:text-red-500">Become a partner →</span>
+            </Link>
           </div>
-        </Container>
-      </Section>
-
-      {/* The Machine Preview */}
-      <Section id="machine-preview" className="bg-vortex-dark text-vortex-white">
-        <Container>
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold">The Machine</h2>
-            <div className="w-16 h-1 bg-accent mx-auto mt-4"></div>
-            <p className="mt-6 text-lg text-vortex-light-grey max-w-2xl mx-auto">
-              Designed, simulated, and manufactured by students.
-            </p>
-            <div className="mt-8">
-              <Button href="/vehicle" variant="primary">
-                Explore the Vehicle
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* Engineering Preview */}
-      <Section id="engineering-preview" className="bg-vortex-white">
-        <Container>
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold">Engineering &amp; Simulation</h2>
-            <div className="w-16 h-1 bg-accent mx-auto mt-4"></div>
-            <p className="mt-6 text-lg text-vortex-grey max-w-2xl mx-auto">
-              Concept → Design → Simulation → Manufacturing → Testing → Validation → Iteration
-            </p>
-            <div className="mt-8">
-              <Button href="/engineering" variant="primary">
-                View Engineering Process
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* Competition Preview */}
-      <Section id="competition-preview" className="bg-vortex-dark text-vortex-white">
-        <Container>
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold">Competition</h2>
-            <div className="w-16 h-1 bg-accent mx-auto mt-4"></div>
-            <p className="mt-6 text-lg text-vortex-light-grey max-w-2xl mx-auto">
-              Baja SAE — designing, building, testing, and racing off-road vehicles.
-            </p>
-            <div className="mt-8">
-              <Button href="/competition" variant="primary">
-                Learn About Baja SAE
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
     </>
   );
 }

@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function PartnerCTA(){ return <section className="py-24 bg-red-600"><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center md:justify-between gap-8"><div><p className="text-white/70 font-mono text-sm">START A CONVERSATION</p><h2 className="mt-2 text-4xl font-bold">Let's build the partnership around something real.</h2></div><Link href="/contact" className="px-7 py-4 bg-black text-white font-semibold hover:bg-gray-950">Contact Vortex One →</Link></div></section>; }

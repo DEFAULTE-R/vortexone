@@ -1,0 +1,20 @@
+VORTEX ONE — FINAL CONSOLIDATED BUILD
+
+This archive merges the current repository you supplied with the redesigned site implementation.
+
+UPLOAD:
+1. Extract this ZIP.
+2. Upload the CONTENTS into the root of DEFAULTE-R/vortexone on GitHub.
+3. Replace existing files when GitHub asks.
+4. Commit directly to main.
+5. Actions -> Deploy Vortex One to GitHub Pages -> Run workflow if needed.
+
+IMPORTANT:
+- The project is configured for GitHub Pages at /vortexone.
+- The workflow uses `npm install` rather than `npm ci` because the repository does not include a lockfile.
+- GitHub Pages must be enabled for the repository and configured to use GitHub Actions.
+- The current vehicle/team data intentionally uses TBD/To be updated where the supplied repository did not contain verified values.
+
+LOCAL CHECK (optional):
+npm install
+npm run build
