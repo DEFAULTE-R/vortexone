@@ -1,94 +1,53 @@
 'use client';
 
 import { motion } from 'framer-motion';
-
-const specifications = [
-  {
-    category: 'Dimensions',
-    specs: [
-      { label: 'Wheelbase', value: 'TBD', unit: 'mm', verified: false },
-      { label: 'Track Width (Front)', value: 'TBD', unit: 'mm', verified: false },
-      { label: 'Track Width (Rear)', value: 'TBD', unit: 'mm', verified: false },
-      { label: 'Ground Clearance', value: 'TBD', unit: 'mm', verified: false },
-      { label: 'Overall Length', value: 'TBD', unit: 'mm', verified: false },
-    ]
-  },
-  {
-    category: 'Powertrain',
-    specs: [
-      { label: 'Engine', value: 'Briggs & Stratton', unit: '', verified: true },
-      { label: 'Displacement', value: '305', unit: 'cc', verified: true },
-      { label: 'Transmission', value: 'CVT', unit: '', verified: true },
-      { label: 'Drive Type', value: 'Rear Wheel Drive', unit: '', verified: true },
-    ]
-  },
-  {
-    category: 'Suspension',
-    specs: [
-      { label: 'Front Suspension', value: 'Double Wishbone', unit: '', verified: false },
-      { label: 'Rear Suspension', value: 'Trailing Arm', unit: '', verified: false },
-      { label: 'Travel', value: 'TBD', unit: 'mm', verified: false },
-    ]
-  },
-  {
-    category: 'Brakes & Steering',
-    specs: [
-      { label: 'Brake Type', value: 'Disc', unit: '', verified: false },
-      { label: 'Steering', value: 'Rack and Pinion', unit: '', verified: false },
-    ]
-  }
-];
+import { vehicleSpecs } from '@/data/vehicleSpecs';
 
 export default function VehicleSpecifications() {
+  const grouped = vehicleSpecs.reduce<Record<string, typeof vehicleSpecs>>((acc, spec) => {
+    acc[spec.category] = acc[spec.category] || [];
+    acc[spec.category].push(spec);
+    return acc;
+  }, {});
+
   return (
     <section className="py-24 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-12"
+          className="mb-12 max-w-2xl"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">
-            Technical Specifications
+          <p className="text-red-500 font-mono text-sm">SPECIFICATIONS</p>
+          <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-white">
+            Technical specifications
           </h2>
           <p className="mt-4 text-gray-400">
-            Detailed specifications for the VX-1. Values marked as TBD are under 
-            development and will be updated as testing progresses.
+            Confirmed figures for the VX-1 will be published here as design
+            and manufacturing decisions are finalized. Values marked TBD are
+            still in development.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {specifications.map((section, sectionIndex) => (
-            <motion.div
-              key={section.category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: sectionIndex * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-gray-900 border border-white/10 rounded-lg overflow-hidden"
-            >
-              <div className="bg-black/50 px-6 py-4 border-b border-white/10">
-                <h3 className="text-lg font-semibold text-white">{section.category}</h3>
+        <div className="grid md:grid-cols-2 gap-px bg-white/10 border border-white/10">
+          {Object.entries(grouped).map(([category, specs]) => (
+            <div key={category} className="bg-black">
+              <div className="px-6 py-4 border-b border-white/10">
+                <h3 className="text-sm font-mono tracking-widest text-red-500 uppercase">{category}</h3>
               </div>
               <div className="divide-y divide-white/5">
-                {section.specs.map((spec) => (
-                  <div key={spec.label} className="px-6 py-4 flex items-center justify-between">
-                    <span className="text-gray-400">{spec.label}</span>
-                    <div className="text-right">
-                      <span className="text-white font-semibold">{spec.value}</span>
-                      {spec.unit && (
-                        <span className="text-gray-500 ml-1 text-sm">{spec.unit}</span>
-                      )}
-                      {!spec.verified && (
-                        <span className="block text-xs text-gray-600 mt-1">Unverified</span>
-                      )}
-                    </div>
+                {specs.map((spec) => (
+                  <div key={spec.spec} className="px-6 py-4 flex items-center justify-between">
+                    <span className="text-gray-400">{spec.spec}</span>
+                    <span className={spec.value === 'To be updated' ? 'text-gray-600 text-sm font-mono' : 'text-white font-semibold'}>
+                      {spec.value}
+                    </span>
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

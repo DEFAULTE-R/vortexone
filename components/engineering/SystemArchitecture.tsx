@@ -1,115 +1,43 @@
-"use client";
 'use client';
 
 import { motion } from 'framer-motion';
-
-const systems = [
-  {
-    name: 'Chassis',
-    status: 'In Development',
-    description: 'Space frame design optimized for stiffness and weight',
-    lead: 'TBD',
-    progress: 30,
-    color: 'red'
-  },
-  {
-    name: 'Suspension',
-    status: 'In Development',
-    description: 'Double wishbone front, trailing arm rear suspension system',
-    lead: 'TBD',
-    progress: 25,
-    color: 'red'
-  },
-  {
-    name: 'Powertrain',
-    status: 'Planning',
-    description: 'Briggs & Stratton engine with CVT transmission',
-    lead: 'TBD',
-    progress: 15,
-    color: 'orange'
-  },
-  {
-    name: 'Steering & Brakes',
-    status: 'Planning',
-    description: 'Rack and pinion steering with disc brake system',
-    lead: 'TBD',
-    progress: 10,
-    color: 'orange'
-  },
-  {
-    name: 'Electrical & Data',
-    status: 'Planning',
-    description: 'Sensor integration and data acquisition system',
-    lead: 'TBD',
-    progress: 5,
-    color: 'yellow'
-  },
-  {
-    name: 'Simulation',
-    status: 'Active',
-    description: 'FEA, kinematics, and dynamics simulation work',
-    lead: 'TBD',
-    progress: 20,
-    color: 'green'
-  }
-];
+import { vehicleSystems } from '@/data/vehicleSpecs';
 
 export default function SystemArchitecture() {
   return (
     <section className="py-24 bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-12"
+          className="mb-12 max-w-2xl"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">
-            System Architecture
+          <p className="text-red-500 font-mono text-sm">SYSTEM ARCHITECTURE</p>
+          <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-white">
+            One vehicle, integrated systems
           </h2>
-          <p className="mt-4 text-gray-400 max-w-2xl">
-            The VX-1 is developed through integrated subsystem engineering. Each 
-            system is designed, analyzed, and validated both independently and as 
-            part of the complete vehicle architecture.
+          <p className="mt-4 text-gray-400">
+            The VX-1 is developed as a set of interdependent subsystems, each
+            designed and validated on its own terms and as part of the
+            complete vehicle. Leads and development status will be updated
+            as the 2026–27 program progresses.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {systems.map((system, index) => (
-            <motion.div
-              key={system.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-black border border-white/10 rounded-lg p-6 hover:border-red-600/50 transition-colors"
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-white/10">
+          {vehicleSystems.map((system, index) => (
+            <div
+              key={system}
+              className="border-b border-r border-white/10 bg-black p-6"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-white">{system.name}</h3>
-                <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                  system.status === 'Active' ? 'bg-green-500/20 text-green-400' :
-                  system.status === 'In Development' ? 'bg-red-500/20 text-red-400' :
-                  'bg-orange-500/20 text-orange-400'
-                }`}>
-                  {system.status}
-                </span>
-              </div>
-              
-              <p className="text-sm text-gray-400 mb-4">{system.description}</p>
-              
-              <div className="flex items-center justify-between text-sm mb-2">
-                <span className="text-gray-500">Lead: {system.lead}</span>
-                <span className="text-gray-500">{system.progress}%</span>
-              </div>
-              
-              <div className="w-full bg-gray-800 rounded-full h-2">
-                <div 
-                  className="bg-red-600 h-2 rounded-full transition-all duration-1000"
-                  style={{ width: `${system.progress}%` }}
-                />
-              </div>
-            </motion.div>
+              <span className="text-red-600 font-mono text-xs">
+                SYS-{String(index + 1).padStart(2, '0')}
+              </span>
+              <h3 className="mt-3 text-lg font-semibold text-white">{system}</h3>
+              <div className="mt-4 text-xs text-gray-600 font-mono">Lead: To be announced</div>
+            </div>
           ))}
         </div>
       </div>

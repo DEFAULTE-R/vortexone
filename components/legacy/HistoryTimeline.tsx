@@ -1,93 +1,47 @@
 'use client';
 
 import { motion } from 'framer-motion';
-
-const timelineEvents = [
-  {
-    year: 'Pre-2020',
-    title: 'Original Vortex One Era',
-    description: 'The team was originally established and competed in Baja SAE events. Historical records are currently being compiled.',
-    status: 'Archive Under Reconstruction'
-  },
-  {
-    year: '2020-2023',
-    title: 'Team Hiatus',
-    description: 'A period where the team was inactive from competition. During this time, the foundation for the return was being laid.',
-    status: 'Documented'
-  },
-  {
-    year: '2024',
-    title: 'The Return',
-    description: 'Vortex One officially returned with renewed engineering ambition and competitive intent. New team formation and initial vehicle development began.',
-    status: 'Current'
-  },
-  {
-    year: '2025',
-    title: 'Building Forward',
-    description: 'Continued development of the VX-1 vehicle and preparation for competition. The team is establishing its new identity and legacy.',
-    status: 'Upcoming'
-  }
-];
+import { legacyTimeline } from '@/data/legacyTimeline';
 
 export default function HistoryTimeline() {
   return (
     <section className="py-24 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-16 max-w-2xl"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">
-            Team History
+          <p className="text-red-500 font-mono text-sm">TIMELINE</p>
+          <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-white">
+            Team history
           </h2>
-          <p className="mt-4 text-gray-400 max-w-2xl">
-            Built before. Paused. Returned. Building forward.
+          <p className="mt-4 text-gray-400">
+            Built before. Paused. Returned. Building forward. Dates and
+            details will be filled in as the archive is confirmed.
           </p>
         </motion.div>
 
-        <div className="relative">
-          {/* Vertical Line */}
-          <div className="absolute left-4 lg:left-1/2 top-0 bottom-0 w-px bg-white/10 lg:transform lg:-translate-x-1/2" />
-
-          <div className="space-y-12">
-            {timelineEvents.map((event, index) => (
-              <motion.div
-                key={event.year}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className={`relative flex flex-col lg:flex-row items-start ${
-                  index % 2 === 0 ? 'lg:flex-row-reverse' : ''
-                }`}
-              >
-                {/* Timeline Dot */}
-                <div className="absolute left-4 lg:left-1/2 transform lg:-translate-x-1/2 w-3 h-3 bg-red-600 rounded-full mt-1.5" />
-                
-                {/* Content */}
-                <div className={`ml-12 lg:ml-0 lg:w-1/2 ${
-                  index % 2 === 0 ? 'lg:pr-12' : 'lg:pl-12'
-                }`}>
-                  <div className="bg-gray-900 border border-white/10 rounded-lg p-6">
-                    <div className="text-2xl font-bold text-red-600 mb-2">{event.year}</div>
-                    <h3 className="text-lg font-semibold text-white mb-2">{event.title}</h3>
-                    <p className="text-sm text-gray-400 mb-4">{event.description}</p>
-                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
-                      event.status === 'Current' ? 'bg-red-500/20 text-red-400' :
-                      event.status === 'Upcoming' ? 'bg-orange-500/20 text-orange-400' :
-                      event.status === 'Archive Under Reconstruction' ? 'bg-yellow-500/20 text-yellow-400' :
-                      'bg-green-500/20 text-green-400'
-                    }`}>
-                      {event.status}
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className="border-l-2 border-white/10">
+          {legacyTimeline.map((event, index) => (
+            <motion.div
+              key={event.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              viewport={{ once: true }}
+              className="relative pl-8 pb-12 last:pb-0"
+            >
+              <div className={`absolute -left-[7px] top-1 w-3 h-3 ${
+                event.title === 'The Comeback' ? 'bg-red-600' : 'bg-gray-700'
+              }`} />
+              <span className="font-mono text-sm text-red-500">{event.year}</span>
+              <h3 className="mt-1 text-xl font-semibold text-white">{event.title}</h3>
+              <p className="mt-2 text-gray-400 max-w-2xl leading-relaxed">{event.description}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
